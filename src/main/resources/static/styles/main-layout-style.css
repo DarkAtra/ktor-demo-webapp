@@ -1,0 +1,21 @@
+body {
+    display: grid;
+    grid-template-areas: "header" "breadcrumb" "main" "footer";
+    grid-template-rows: auto auto 1fr auto;
+}
+
+body > header {
+    grid-area: header;
+}
+
+body > .breadcrumb {
+    grid-area: breadcrumb;
+}
+
+body > main {
+    grid-area: main;
+}
+
+body > footer {
+    grid-area: footer;
+}
