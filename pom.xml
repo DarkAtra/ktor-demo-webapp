@@ -158,10 +158,8 @@
                         <extensions>true</extensions>
                         <configuration>
                             <buildArgs>
-                                <buildArg>-H:ReflectionConfigurationFiles=${project.build.directory}/classes/META-INF/native-image/reflect-config.json
-                                </buildArg>
-                                <buildArg>-H:ResourceConfigurationFiles=${project.build.directory}/classes/META-INF/native-image/resource-config.json</buildArg>
-                                <buildArg>-H:IncludeResources="${project.build.directory}/classes/logback.xml"</buildArg>
+                                <arg>-H:ReflectionConfigurationFiles=${project.build.directory}/classes/META-INF/native-image/reflect-config.json</arg>
+                                <arg>-H:ResourceConfigurationFiles=${project.build.directory}/classes/META-INF/native-image/resource-config.json</arg>
                             </buildArgs>
                         </configuration>
                         <executions>
