@@ -6,7 +6,7 @@ It also supports native compilation using GraalVM.
 ## Building the application
 
 ```
-mvn clean package
+./mvnw clean package
 ```
 
 The resulting jars can be found in the `target` directory.
@@ -22,7 +22,7 @@ The web page should respond at http://localhost:8080.
 Ensure that you're using a JDK that supports native image compilation ([such as GraalVM](https://www.graalvm.org/latest/docs/getting-started/)).
 
 ```
-mvn -Pnative clean package
+./mvnw -Pnative clean package
 ```
 
 The resulting executable can be found in the `target` directory.
