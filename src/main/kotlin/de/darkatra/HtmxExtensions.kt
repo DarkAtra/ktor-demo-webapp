@@ -13,3 +13,7 @@ fun HTMLTag.hxTarget(selector: String) {
 fun HTMLTag.hxPushUrl(url: String) {
     attributes["hx-push-url"] = url
 }
+
+fun HTMLTag.hxSwapOob(swap: String) {
+    attributes["hx-swap-oob"] = swap
+}

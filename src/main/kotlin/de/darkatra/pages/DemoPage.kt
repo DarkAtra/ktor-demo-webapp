@@ -3,6 +3,7 @@ package de.darkatra.pages
 import de.darkatra.components
 import de.darkatra.components.navigation.navigation
 import de.darkatra.containerClasses
+import de.darkatra.hxSwapOob
 import de.darkatra.layouts.MainLayout
 import io.ktor.server.application.call
 import io.ktor.server.html.respondHtml
@@ -33,7 +34,7 @@ object DemoPage {
                         mainSlot()
                         div {
                             id = "header"
-                            attributes["hx-swap-oob"] = "innerHTML"
+                            hxSwapOob("innerHTML")
                             with(call.request) {
                                 navigation()
                             }
