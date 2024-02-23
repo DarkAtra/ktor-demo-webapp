@@ -1,31 +1,35 @@
 package de.darkatra
 
-import de.darkatra.layouts.MainLayout
+import de.darkatra.components.navigation.navigation
 import de.darkatra.pages.DashboardPage
 import de.darkatra.pages.DemoPage
 import io.ktor.server.application.Application
 import io.ktor.server.application.call
 import io.ktor.server.engine.embeddedServer
-import io.ktor.server.html.respondHtmlTemplate
+import io.ktor.server.html.respondHtml
 import io.ktor.server.http.content.staticResources
 import io.ktor.server.netty.Netty
 import io.ktor.server.routing.get
 import io.ktor.server.routing.routing
+import kotlinx.html.body
 
 fun Application.module() {
-    routing {
 
+    routing {
         staticResources("/", "static")
 
-        get("/") {
-            call.respondHtmlTemplate(MainLayout()) {
-                DashboardPage.render()
-            }
-        }
+        DashboardPage.setupRoutes()
+        DemoPage.setupRoutes()
 
-        get("/demo") {
-            call.respondHtmlTemplate(MainLayout()) {
-                DemoPage.render()
+        components {
+            get("/navigation") {
+                call.respondHtml {
+                    body {
+                        with(call.request) {
+                            navigation()
+                        }
+                    }
+                }
             }
         }
     }
@@ -37,8 +41,7 @@ fun main() {
         factory = Netty,
         host = "0.0.0.0",
         port = 8080,
-        module = Application::module,
-        watchPaths = listOf("target")
+        module = Application::module
     )
 
     server.start(wait = true)

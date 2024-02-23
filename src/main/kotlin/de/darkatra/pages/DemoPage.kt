@@ -1,31 +1,61 @@
 package de.darkatra.pages
 
-import de.darkatra.components.container.containerClasses
+import de.darkatra.components
+import de.darkatra.components.navigation.navigation
+import de.darkatra.containerClasses
 import de.darkatra.layouts.MainLayout
+import io.ktor.server.application.call
+import io.ktor.server.html.respondHtml
+import io.ktor.server.html.respondHtmlTemplate
+import io.ktor.server.routing.Routing
+import io.ktor.server.routing.get
+import kotlinx.html.FlowContent
+import kotlinx.html.body
 import kotlinx.html.classes
 import kotlinx.html.div
+import kotlinx.html.id
 
 object DemoPage {
 
-    context(MainLayout)
-    fun render() {
+    context(Routing)
+    fun setupRoutes() {
 
-        breadcrumbSlot {
-            div {
-                classes = containerClasses() + setOf("py-4")
-                +"/ Demo"
+        get("/demo") {
+            call.respondHtmlTemplate(MainLayout(call.request)) {
+                render()
             }
         }
 
-        mainSlot {
-            div {
-                classes = containerClasses() + setOf("py-4")
-                +"""Lorem ipsum dolor sit amet, consectetur adipiscing elit.Mauris pretium lacinia sapien quis pretium. Quisque ultricies, elit vitae pharetra
-                    |ultrices, massa ipsum ultrices dolor, sit amet sagittis tortor nibh ut nisl. Donec laoreet scelerisque pharetra. Vestibulum a pretium
-                    |justo. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Quisque fermentum luctus semper.
-                    |Nullam vestibulum felis non laoreet finibus. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur augue justo, tempus nec
-                    |luctus vel, tincidunt id urna. """.trimMargin()
+        components {
+            get("/demo") {
+                call.respondHtml {
+                    body {
+                        mainSlot()
+                        div {
+                            id = "header"
+                            attributes["hx-swap-oob"] = "innerHTML"
+                            with(call.request) {
+                                navigation()
+                            }
+                        }
+                    }
+                }
             }
+        }
+    }
+
+    context(MainLayout)
+    private fun render() {
+        mainSlot {
+            mainSlot()
+        }
+    }
+
+    context(FlowContent)
+    private fun mainSlot() {
+        div {
+            classes = containerClasses() + setOf("py-4")
+            +"Demo Demo Demo"
         }
     }
 }

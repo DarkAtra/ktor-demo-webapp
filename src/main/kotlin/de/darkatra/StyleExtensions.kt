@@ -1,4 +1,4 @@
-package de.darkatra.components.container
+package de.darkatra
 
 import kotlinx.html.FlowContent
 
